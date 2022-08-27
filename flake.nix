@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, flake-parts, ... }:
+  outputs = { self, flake-parts, nixpkgs, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
       imports = [
         # To import a flake module
@@ -16,17 +16,23 @@
 
       ];
       systems = nixpkgs.lib.systems.flakeExposed; 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        packages.default = with pkgs; [
-		nvim
-		llvmPackages_14.stdenv
-		];
-      };
-      flake = {
-        # The usual flake attributes can be defined here, including system-
-        # agnostic ones like nixosModule and system-enumerating ones, although
-        # those are more easily expressed in perSystem.
+      perSystem = { config, self', inputs', pkgs, system,  ... }: {
+        
+	buildInputs = with pkgs; [
+		neovim
+		git
+		nixpkgs-fmt
+		(pkgs.nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })
+		
+	];
 
-      };
+	apps.default = let inherit system; in {
+			
+		default = let inherit system; in
+			 
+
+		nixpkgs-fmt
+	};
+
     };
 }
