@@ -23,6 +23,11 @@
 
   </div>
 
+## Nix Flake
+
+this fork aims building `nix` flake for NvChad
+**WARNING**: it's completely unusable on the moment
+
 ## Showcase
 
 <img src="https://nvchad.com/features/nvdash.webp">
