@@ -22,6 +22,7 @@
         # Provided by treefmt-flake.flakeModule
         treefmt.formatters = {
           inherit (pkgs)
+		shfmt
             nixpkgs-fmt;
         };
 
